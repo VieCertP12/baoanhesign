@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bảo Hành Chứng Chỉ Lỗi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #F8FAFC; /* Slate 50 */
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        ::-webkit-scrollbar { display: none; }
+
+        /* Hiệu ứng xuất hiện mềm mại */
+        .reveal {
+            animation: floatUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes floatUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pulse-soft {
+            animation: pulseSoft 2s infinite;
+        }
+
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.95); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen pb-16">
+
+    <!-- Header bo tròn vuốt xuống -->
+    <div class="bg-white px-5 pt-12 pb-6 rounded-b-[40px] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] relative z-10">
+        <div class="max-w-md mx-auto">
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-2">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <h1 class="text-2xl font-extrabold text-center text-slate-900 tracking-tight mb-1">Hỗ Trợ & Bảo Hành</h1>
+            <p class="text-center text-slate-500 text-sm font-medium">Trung tâm xử lý chứng chỉ ESign</p>
+        </div>
+    </div>
+
+    <!-- Container chính -->
+    <div class="max-w-md mx-auto px-5 -mt-4 relative z-20">
+
+        <!-- LỜI CÁO LỖI (Thiết kế cảm xúc) -->
+        <div class="reveal" style="animation-delay: 0.1s;">
+            <div class="bg-gradient-to-br from-amber-50 to-orange-50/50 border border-amber-100/60 rounded-[28px] p-6 shadow-sm mb-8">
+                <div class="flex items-start gap-4">
+                    <div class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 mt-1 pulse-soft">
+                        <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-[17px] font-bold text-amber-900 mb-2 leading-tight">Lời Cáo Lỗi Từ Đội Ngũ</h2>
+                        <p class="text-[14px] text-amber-800/80 leading-relaxed font-medium">
+                            Chứng chỉ của bạn hiện đang bị Apple thu hồi ngoài ý muốn. Chúng mình thực sự hiểu cảm giác bất tiện lúc này và gửi lời xin lỗi chân thành nhất đến bạn. Mong bạn vững tâm đồng hành cùng ESign vượt qua sự cố này!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KHU VỰC TẢI XUỐNG TẠM THỜI -->
+        <div class="reveal bg-white rounded-[32px] p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] mb-10 border border-slate-100" style="animation-delay: 0.2s;">
+            
+            <div class="text-center mb-5">
+                <span class="inline-block bg-indigo-100 text-indigo-700 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Giải pháp chữa cháy</span>
+                <p class="text-[14px] text-slate-600 font-medium leading-relaxed px-2">
+                    Dưới đây là công cụ <strong class="text-indigo-600">tạm thời</strong> để bạn không bị gián đoạn công việc trong lúc chờ Apple cấp lại chứng chỉ mới. Thông cảm vì sự bất tiện này, cảm ơn mọi người!
+                </p>
+            </div>
+
+            <!-- Tab Control -->
+            <div class="bg-slate-100/80 p-1.5 rounded-[20px] flex w-full mb-6 relative">
+                <button id="btn-esign" onclick="switchTab('esign')" class="flex-1 py-2.5 text-[14px] font-bold rounded-[16px] bg-white text-indigo-600 shadow-sm transition-all duration-300">
+                    ESign Tạm Thời
+                </button>
+                <button id="btn-cert" onclick="switchTab('cert')" class="flex-1 py-2.5 text-[14px] font-medium rounded-[16px] text-slate-500 hover:text-slate-700 transition-all duration-300">
+                    Cert Tạm Thời
+                </button>
+            </div>
+
+            <!-- Danh sách App Tạm thời -->
+            <div class="relative min-h-[200px]">
+                
+                <!-- Tab ESign -->
+                <div id="content-esign" class="space-y-3 transition-all duration-300">
+                    <!-- Item 1 -->
+                    <div class="flex items-center gap-4 p-3 rounded-[20px] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                        <img src="https://i.imgur.com/hPj8ui8.png" alt="ESign Logo" class="w-14 h-14 rounded-2xl shadow-sm object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-[16px] text-slate-900 truncate">ESign Chữa Cháy 1</h3>
+                            <p class="text-[12px] text-slate-500 mt-0.5">Dùng tạm chờ bảo hành</p>
+                        </div>
+                        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-bold text-[13px] px-4 py-2 rounded-full transition-colors flex-shrink-0">
+                            CÀI ĐẶT
+                        </button>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex items-center gap-4 p-3 rounded-[20px] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                        <img src="https://i.imgur.com/hPj8ui8.png" alt="ESign Logo" class="w-14 h-14 rounded-2xl shadow-sm object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-[16px] text-slate-900 truncate">ESign Chữa Cháy 2</h3>
+                            <p class="text-[12px] text-slate-500 mt-0.5">Dự phòng thứ hai</p>
+                        </div>
+                        <button class="bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-bold text-[13px] px-4 py-2 rounded-full transition-colors flex-shrink-0">
+                            CÀI ĐẶT
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab Cert (Ẩn) -->
+                <div id="content-cert" class="space-y-3 absolute top-0 left-0 w-full opacity-0 pointer-events-none transition-all duration-300 translate-x-4">
+                    <!-- Item 1 -->
+                    <div class="flex items-center gap-4 p-3 rounded-[20px] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                        <img src="https://i.imgur.com/cVseqy1.png" alt="Cert Logo" class="w-14 h-14 rounded-2xl shadow-sm object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-[16px] text-slate-900 truncate">Cert Tạm Thời 1</h3>
+                            <p class="text-[12px] text-slate-500 mt-0.5">Chứng chỉ khẩn cấp</p>
+                        </div>
+                        <button class="bg-emerald-50 hover:bg-emerald-100 text-emerald-600 font-bold text-[13px] px-4 py-2 rounded-full transition-colors flex-shrink-0">
+                            TẢI VỀ
+                        </button>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex items-center gap-4 p-3 rounded-[20px] hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+                        <img src="https://i.imgur.com/cVseqy1.png" alt="Cert Logo" class="w-14 h-14 rounded-2xl shadow-sm object-cover">
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-[16px] text-slate-900 truncate">Cert Tạm Thời 2</h3>
+                            <p class="text-[12px] text-slate-500 mt-0.5">Bản sao lưu dự phòng</p>
+                        </div>
+                        <button class="bg-emerald-50 hover:bg-emerald-100 text-emerald-600 font-bold text-[13px] px-4 py-2 rounded-full transition-colors flex-shrink-0">
+                            TẢI VỀ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HƯỚNG DẪN BẢO HÀNH (Giao diện Timeline đột phá) -->
+        <div class="reveal" style="animation-delay: 0.3s;">
+            <div class="flex items-center gap-2 mb-8 px-2">
+                <i data-lucide="map" class="w-6 h-6 text-slate-400"></i>
+                <h2 class="text-[22px] font-extrabold text-slate-800">Quy Trình Bảo Hành</h2>
+            </div>
+            
+            <!-- Timeline Container -->
+            <div class="relative pl-6 ml-2 space-y-10">
+                <!-- Đường kẻ dọc -->
+                <div class="absolute left-0 top-2 bottom-6 w-[2px] bg-slate-200 rounded-full"></div>
+
+                <!-- Bước 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-8 h-8 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center text-[14px] shadow-[0_0_0_4px_#F8FAFC]">1</div>
+                    <div class="bg-white rounded-[24px] p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-[17px] mb-2">Tra cứu đơn hàng</h3>
+                        <p class="text-[14px] text-slate-500 leading-relaxed mb-4">Tại màn hình chính của ứng dụng/web, bạn vui lòng tìm và chọn vào mục <strong>Tra cứu đơn hàng</strong> để bắt đầu quá trình kiểm tra.</p>
+                        <img src="https://i.imgur.com/6m3yYud.png" alt="Bước 1" class="w-full rounded-[14px] border border-slate-100">
+                    </div>
+                </div>
+
+                <!-- Bước 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-8 h-8 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center text-[14px] shadow-[0_0_0_4px_#F8FAFC]">2</div>
+                    <div class="bg-white rounded-[24px] p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-[17px] mb-2">Nhập thông tin</h3>
+                        <p class="text-[14px] text-slate-500 leading-relaxed mb-4">Hãy điền chính xác mã <strong>UDID</strong> của máy hoặc <strong>Mã đơn hàng</strong> của bạn vào ô trống, sau đó nhấn nút <strong>Tìm kiếm</strong>.</p>
+                        <img src="https://i.imgur.com/GwZHrVG.png" alt="Bước 2" class="w-full rounded-[14px] border border-slate-100">
+                    </div>
+                </div>
+
+                <!-- Bước 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-8 h-8 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center text-[14px] shadow-[0_0_0_4px_#F8FAFC]">3</div>
+                    <div class="bg-white rounded-[24px] p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-[17px] mb-2">Kiểm tra tình trạng</h3>
+                        <p class="text-[14px] text-slate-500 leading-relaxed mb-4">Khi thông tin đơn hàng hiện ra, bạn tiếp tục bấm vào nút <strong>Kiểm tra chứng chỉ</strong> để hệ thống quét tình trạng hiện tại.</p>
+                        <img src="https://i.imgur.com/tryQJAs.png" alt="Bước 3" class="w-full rounded-[14px] border border-slate-100">
+                    </div>
+                </div>
+
+                <!-- Bước 4 -->
+                <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-8 h-8 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center text-[14px] shadow-[0_0_0_4px_#F8FAFC]">4</div>
+                    <div class="bg-white rounded-[24px] p-5 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100">
+                        <h3 class="font-bold text-slate-900 text-[17px] mb-2">Gửi yêu cầu bảo hành</h3>
+                        <p class="text-[14px] text-slate-500 leading-relaxed mb-4">Nếu màn hình hiển thị thông báo lỗi chứng chỉ (như hình minh họa bên dưới), hãy nhấn ngay vào nút <strong>Bảo hành</strong>.</p>
+                        <img src="https://i.imgur.com/AQ8Iqbd.png" alt="Bước 4" class="w-full rounded-[14px] border border-slate-100">
+                    </div>
+                </div>
+
+                <!-- Bước 5 -->
+                <div class="relative">
+                    <div class="absolute -left-[33px] top-1 w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center text-[14px] shadow-[0_0_0_4px_#F8FAFC] pulse-soft">5</div>
+                    <div class="bg-gradient-to-b from-indigo-50/50 to-white rounded-[24px] p-5 shadow-[0_8px_30px_rgb(99,102,241,0.08)] border border-indigo-100">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-indigo-600"></i>
+                            <h3 class="font-bold text-indigo-900 text-[17px]">Hoàn tất & Chờ đợi</h3>
+                        </div>
+                        <p class="text-[14px] text-slate-600 leading-relaxed mb-4">Cuối cùng, bấm <strong>Đồng ý</strong>. Vui lòng kiên nhẫn chờ từ <strong class="text-indigo-600 text-[15px]">17 đến 33 ngày</strong> để Apple tiến hành cấp lại chứng chỉ mới hoàn toàn cho thiết bị của bạn.</p>
+                        <img src="https://i.imgur.com/NA7AXrz.png" alt="Bước 5" class="w-full rounded-[14px] border border-indigo-100/50">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Khởi tạo icon
+        lucide.createIcons();
+
+        // Style cho Tab Control
+        const activeClass = "flex-1 py-2.5 text-[14px] font-bold rounded-[16px] bg-white text-indigo-600 shadow-sm transition-all duration-300";
+        const inactiveClass = "flex-1 py-2.5 text-[14px] font-medium rounded-[16px] text-slate-500 hover:text-slate-700 transition-all duration-300";
+
+        function switchTab(tabName) {
+            const btnEsign = document.getElementById('btn-esign');
+            const btnCert = document.getElementById('btn-cert');
+            const contentEsign = document.getElementById('content-esign');
+            const contentCert = document.getElementById('content-cert');
+            
+            if (tabName === 'esign') {
+                btnEsign.className = activeClass;
+                btnCert.className = inactiveClass;
+                
+                contentCert.classList.add('opacity-0', 'translate-x-4', 'pointer-events-none');
+                contentCert.classList.remove('opacity-100', 'translate-x-0');
+                
+                setTimeout(() => {
+                    contentEsign.classList.remove('opacity-0', '-translate-x-4', 'pointer-events-none');
+                    contentEsign.classList.add('opacity-100', 'translate-x-0');
+                }, 50);
+
+            } else {
+                btnCert.className = activeClass;
+                btnEsign.className = inactiveClass;
+                
+                contentEsign.classList.add('opacity-0', '-translate-x-4', 'pointer-events-none');
+                contentEsign.classList.remove('opacity-100', 'translate-x-0');
+                
+                setTimeout(() => {
+                    contentCert.classList.remove('opacity-0', 'translate-x-4', 'pointer-events-none');
+                    contentCert.classList.add('opacity-100', 'translate-x-0');
+                }, 50);
+            }
+        }
+    </script>
+</body>
+</html>
